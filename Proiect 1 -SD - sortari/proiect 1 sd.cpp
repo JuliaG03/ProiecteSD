@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 ///----------------------------------BUBBLE SORT
 
@@ -48,8 +49,84 @@ int frecventa[max];
         vector[i] = aux[i];}
 }
 
+///---------------------MERGE SORT
+
+void merge(int a[], int stanga, int mij, int dreapta)
+
+{   int i,j,k;
+    int n1 = mij-stanga+1;
+    int n2 = dreapta-mij;
+    int st[n1], dr[n2];
+
+    for (i=0; i < n1; i++)
+        st[i] = a[ stanga+i ];
+    for (j=0; j < n2; j++)
+        dr[j] = a[ mij+1+j ];
+
+    i = 0;
+    j = 0;
+    k = stanga;
+
+    while ( i<n1 && j<n2 ){
+        if (st[i] <= dr[j]) {a[k] = st[i];
+                            i++;}
+        else {a[k] = dr[j];
+            j++;}
+        k++;}
+
+    while (i < n1){
+        a[k] = st[i];
+        i++;
+        k++;}
+
+    while (j < n2) {
+        a[k] = dr[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(int a[], int stanga, int dreapta)
+        {
+    int mij;
+    if(stanga < dreapta)
+        {mij = (stanga + dreapta)/2;
+        mergeSort(a, stanga, mij);
+        mergeSort(a, mij + 1, dreapta);
+        merge(a, stanga, mij, dreapta);
+        }
+        }
+
 
 
 int main()
-{}
+{
+int v[10] = {8, 4, 5, 1, 3, 9, 0, 2, 7, 6 };
+
+
+
+cout<<"merge sort:  \n";
+
+mergeSort(v,0,9);
+for(int i=0;i<10;i++) cout<< v[i]<< " ";
+
+cout<<"\n\n bubble sort:  \n";
+
+bubbleSort(v,9);
+for(int i=0;i<10;i++) cout<< v[i]<< " ";
+
+cout<<"\n\n counting sort:  \n";
+
+CountingSort(v,9);
+for(int i=0;i<10;i++) cout<< v[i]<< " ";
+
+sort(v,v+10);
+
+for(int i=0;i<10;i++) cout<< v[i]<< " ";
+
+
+
+
+
+}
 
