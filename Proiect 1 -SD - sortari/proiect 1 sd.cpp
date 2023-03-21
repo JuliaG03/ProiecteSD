@@ -51,52 +51,41 @@ int max = vector[0];
 }
 
 ///---------------------MERGE SORT
+void merge(long arr[], int l, int mid, int r){
 
-void merge( long a[], int stanga, int mij, int dreapta)
 
-{   int i,j,k;
-    int n1 = mij-stanga+1;
-    int n2 = dreapta-mij;
-    int st[n1], dr[n2];
+    int i = 0 , j = 0 , k = l;
 
-    for (i=0; i < n1; i++)
-        st[i] = a[ stanga+i ];
-    for (j=0; j < n2; j++)
-        dr[j] = a[ mij+1+j ];
+    //limite superioare pt vectori
+    int n1 = mid - l + 1;
+    int n2 = r - mid;
 
-    i = 0;
-    j = 0;
-    k = stanga;
+    int* arr1 = new int[n1];
+    int* arr2 = new int[n2];
 
-    while ( i<n1 && j<n2 ){
-        if (st[i] <= dr[j]) {a[k] = st[i];
-                            i++;}
-        else {a[k] = dr[j];
+    for(int i=0; i<n1; i++) arr1[i] = arr[ l+i ];
+    for(int i=0; i<n2; i++) arr2[i] = arr[ mid+i+1 ];
+
+    while(i < n1 && j < n2){
+        if(arr1[i] <= arr2[j]){arr[k] = arr1[i];
+                                i++;}
+        else{arr[k] = arr2[j];
             j++;}
         k++;}
 
-    while (i < n1){
-        a[k] = st[i];
-        i++;
-        k++;}
+    while(i < n1) arr[k++] = arr1[i++];
+    while(j < n2) arr[k++] = arr2[j++];
+    delete[] arr1;
+    delete[] arr2;}
 
-    while (j < n2) {
-        a[k] = dr[j];
-        j++;
-        k++;
-    }
-}
 
-void mergeSort(long a[], int stanga, int dreapta)
-        {
-    int mij;
-    if(stanga < dreapta)
-        {mij = (stanga + dreapta)/2;
-        mergeSort(a, stanga, mij);
-        mergeSort(a, mij + 1, dreapta);
-        merge(a, stanga, mij, dreapta);
-        }
-        }
+void mergeSort(long arr[], int l, int r){
+    if(l < r){
+        int mid = (l + r - 1) / 2;
+        mergeSort(arr, l, mid);
+        mergeSort(arr, mid+1, r);
+        merge(arr, l, mid, r);}}
+
 ///------------------------------------Radix Sort
 
 void zero(long v[] , long n){
@@ -169,8 +158,8 @@ int main(){
     //bubbleSort(v,nrElemente);
     //radixSort(v,nrElemente);
     //shellSort(v,nrElemente);
-    //countingSort(v,nrElemente);
-    sort(v,v+nrElemente);
+    countingSort(v,nrElemente);
+    //sort(v,v+nrElemente);
         auto stop = high_resolution_clock::now();
 //afisare(v,nrElemente);
     auto duration = duration_cast<microseconds>(stop - start);
