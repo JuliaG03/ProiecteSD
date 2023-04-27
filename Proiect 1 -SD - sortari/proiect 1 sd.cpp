@@ -111,7 +111,7 @@ void numara(long v[],long n,long exp){
     for(long i=0; i<n ;i++)cnt[(v[i]/exp)%10]++;
     cnt[0]--;
     for(long i=1;i<10;i++) cnt[i] += cnt[i-1];
-    for(long i=n-1;i>=0;i--){aux[cnt[(v[i]/exp)%10]] = v[i];
+    for(long i=n-1;i>=0;i--){aux[ cnt[(v[i]/exp)%10 ]] = v[i];
                                     cnt[(v[i]/exp)%10]--;}
     for(long i=0;i<n;i++){v[i] = aux[i];}
 
@@ -138,37 +138,55 @@ void shellSort(long v[], long n)
 
 
 //declarare
-    int n = 6;      //puterea lui 10 de elemente
-    int putereExp = 4;  //cate cifre sa aibe numarul
-    long nrElemente = pow(10,n);
-    long *v = new long[nrElemente];
+ //   int n = 6;      //10 la puterea n elemente
+ //   int putereExp = 4;  //cate cifre sa aibe numarul
+  //  long nrElemente = pow(10,n);
+  //  long *v = new long[nrElemente];
 
 int main(){
+long  v1[] = {14, 23,10,7,100,39};
+long  v2[] =  {14, 23,10,7,100,39};
+long  v3[] =  {14, 23,10,7,100,39};
+long  v4[] =  {14, 23,10,7,100,39};
+long  v5[] =  {14, 23,10,7,100,39};
+long  v6[] =  {14, 23,10,7,100,39};
 
-    long exp = pow(10,putereExp);
-    random_device rd;
-    default_random_engine generator(rd());
-    uniform_int_distribution<long long unsigned> distribution(0,0xFFFFFFFFFFFFFFFF);
+long nrElemente = 5;
+  // long exp = pow(10,putereExp);
+   // random_device rd;
+   // default_random_engine generator(rd());
+  //  uniform_int_distribution<long long unsigned> distribution(0,0xFFFFFFFFFFFFFFFF);
 
-    for (int i = 0; i < nrElemente; i++)
-          v[i] = distribution(generator)%exp;
+  //  for (int i = 0; i < nrElemente; i++)
+    //      v[i] = distribution(generator)%exp;
 
-        auto start = high_resolution_clock::now();
-    //mergeSort(v,0,nrElemente-1);
-    //bubbleSort(v,nrElemente);
-    //radixSort(v,nrElemente);
-    //shellSort(v,nrElemente);
-    countingSort(v,nrElemente);
-    //sort(v,v+nrElemente);
-        auto stop = high_resolution_clock::now();
-//afisare(v,nrElemente);
-    auto duration = duration_cast<microseconds>(stop - start);
-    cout<<"Time: "<<duration.count();  //microsec
+  //      auto start = high_resolution_clock::now();
 
-    delete[] v;
+    cout<<"\nMerge sort : ";
+    mergeSort(v1,0,nrElemente-1);
+    for(int i=0;i<nrElemente;i++){cout<<v1[i]<<" ";}
+    cout<<"\nBubble sort: ";
+    bubbleSort(v2,nrElemente);
+    for(int i=0;i<nrElemente;i++){cout<<v2[i]<<" ";}
+    cout<<"\nRadix sort: ";
+    radixSort(v3,nrElemente);
+    for(int i=0;i<nrElemente;i++){cout<<v3[i]<<" ";}
+    cout<<"\nShell sort: ";
+    shellSort(v4,nrElemente);
+    for(int i=0;i<nrElemente;i++){cout<<v4[i]<<" ";}
+    cout<<"\nCounting sort: ";
+    countingSort(v5,nrElemente);
+    for(int i=0;i<nrElemente;i++){cout<<v5[i]<<" ";}
+    cout<<"\n Sort C++: ";
+    sort(v6,v6+nrElemente);
+    for(int i=0;i<nrElemente;i++){cout<<v6[i]<<" ";}
+       // auto stop = high_resolution_clock::now();
+
+   // auto duration = duration_cast<microseconds>(stop - start);
+  //  cout<<"Time: "<<duration.count();  //microsec
+
 
       return 0;
-
 
 }
 
